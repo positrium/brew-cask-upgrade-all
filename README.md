@@ -13,7 +13,10 @@ appcleaner
 latest  : 3.3
 current : 3.3
 
-( something upgrade cask , also need your su password. )
+...
+
+( something upgrade casks , also need your su password. )
+
 ...
 
 brew cleanup:
