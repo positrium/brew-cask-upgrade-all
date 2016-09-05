@@ -1,9 +1,21 @@
 # brew-cask-upgrade-all
 
+# What is this doing
+
+1. `brew cask update`
+1. `brew upgrade `
+1. check latest version of cask items. `uninstall --force` and `install` that have update version.
+1. `brew cleanup`
+1. `brew cask cleanup`
+
 # usage
 
 ```
 $ brew-cask-upgrade-all
+```
+
+```
+# stdout log
 
 brew cask update:
 Already up-to-date.
@@ -42,13 +54,5 @@ brew cask cleanup:
 ==> Removing cached downloads
 Nothing to do
 ```
-
-# What is this doing
-
-1. `brew cask update`
-1. `brew upgrade `
-1. check latest version of cask items. `uninstall --force` and `install` that have update version.
-1. `brew cleanup`
-1. `brew cask cleanup`
 
 
