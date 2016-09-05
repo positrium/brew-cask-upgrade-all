@@ -9,9 +9,26 @@ brew cask update:
 Already up-to-date.
 brew upgrade:
 
-appcleaner
-latest  : 3.3
-current : 3.3
+hosts
+latest  : 1.3
+current : 1.3
+
+iterm2
+latest  : 3.0.8
+current : 3.0.7
+iterm2 updating..
+==> Removing App: '/Applications/iTerm.app'
+==> Satisfying dependencies
+complete
+==> Downloading https://iterm2.com/downloads/stable/iTerm2-3_0_8.zip
+==> Verifying checksum for Cask iterm2
+==> Moving App 'iTerm.app' to '/Applications/iTerm.app'
+🍺  iterm2 was successfully installed!
+iterm2 updated !!!
+
+java
+latest  : 1.8.0_102-b14
+current : 1.8.0_102-b14
 
 ...
 
