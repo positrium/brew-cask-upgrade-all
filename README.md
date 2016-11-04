@@ -1,5 +1,19 @@
 # brew-cask-upgrade-all
 
+# Requirements
+
+- macOS
+- ruby
+
+# Usage
+
+```
+$ brew-cask-upgrade-all [-f]
+
+-f : force upgrade that newest version is 'latest'
+```
+
+
 # What is this doing
 
 1. `brew cask update`
