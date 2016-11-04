@@ -8,6 +8,8 @@ puts `brew upgrade`
 cask_list = `brew cask list`.split("\n")
 ignore_item = ['']#gpgtools']
 
+FORCE_UPDATE = ARGV[0] == '-f'
+
 cask_list.each do | item |
   next if ignore_item.include?(item)
 
@@ -33,7 +35,7 @@ cask_list.each do | item |
   puts "current : #{current}"
 
 
-  if latest != current
+  if latest != current || FORCE_UPDATE && latest == 'latest'
       puts "#{item} updating.."
       puts `brew cask uninstall --force #{item}`
       puts `brew cask install #{item}`
