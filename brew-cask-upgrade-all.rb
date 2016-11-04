@@ -33,7 +33,7 @@ cask_list.each do | item |
   puts "current : #{current}"
 
 
-  if latest > current
+  if latest != current
       puts "#{item} updating.."
       puts `brew cask uninstall --force #{item}`
       puts `brew cask install #{item}`
