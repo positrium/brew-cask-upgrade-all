@@ -5,14 +5,6 @@
 - macOS
 - ruby
 
-# Usage
-
-```
-$ brew-cask-upgrade-all [-f]
-
--f : force upgrade that newest version is 'latest'
-```
-
 
 # What is this doing
 
@@ -25,7 +17,9 @@ $ brew-cask-upgrade-all [-f]
 # usage
 
 ```
-$ brew-cask-upgrade-all
+$ brew-cask-upgrade-all [-f]
+
+-f : force upgrade that newest version is 'latest'
 ```
 
 ```
