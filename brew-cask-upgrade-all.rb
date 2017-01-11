@@ -1,9 +1,12 @@
 #!/usr/bin/env ruby
 
-puts "brew cask update:"
-puts `brew cask update`
+puts "brew update:"
+puts `brew update`
+
 puts "brew upgrade:"
 puts `brew upgrade`
+
+puts "brew cask upgrade"
 
 cask_list = `brew cask list`.split("\n")
 ignore_item = ['']#gpgtools']
@@ -16,7 +19,7 @@ cask_list.each do | item |
   current = `ls -t /usr/local/Caskroom/#{item}/`.split("\n")
   current = current.first
 
-  # amazon対策
+  # for amazon products
   if current.nil?
     puts `ls -t /usr/local/Caskroom/#{item}/`.split("\n")
   else
@@ -26,7 +29,7 @@ cask_list.each do | item |
   current = Gem::Version.create(current) if Gem::Version.correct?(current)
   latest = `brew cask info #{item} | grep #{item} | grep -v github | grep -v http | grep :`
 
-  # 画面出力
+  # output
   puts "#{item}"
   latest = latest.split(" ")[1] if latest.split(" ").count >= 2
   latest = latest.gsub(/,/, '.') if latest.include?(",")
@@ -47,5 +50,8 @@ end
 
 puts "brew cleanup:"
 puts `brew cleanup`
+
 puts "brew cask cleanup:"
 puts `brew cask cleanup`
+
+puts "\nall of done.\n"
