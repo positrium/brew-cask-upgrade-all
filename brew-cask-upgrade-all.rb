@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-puts "brew update:"
+puts 'brew update:'
 puts `brew update`
 
-puts "brew upgrade:"
+puts 'brew upgrade:'
 puts `brew upgrade`
 
-puts "brew cask upgrade"
+puts 'brew cask upgrade'
 
 ignore_item = ['']#gpgtools']
 
@@ -34,13 +34,13 @@ FORCE_UPDATE = ARGV[0] == '-f'
       puts "#{item} updated !!!"
   end
 
-  puts " "
+  puts ' '
 end
 
-puts "brew cleanup:"
+puts 'brew cleanup:'
 puts `brew cleanup`
 
-puts "brew cask cleanup:"
+puts 'brew cask cleanup:'
 puts `brew cask cleanup`
 
 puts "\nall of done.\n"
