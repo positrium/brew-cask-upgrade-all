@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
-puts "brew update:"
+puts 'brew update:'
 puts `brew update`
 
-puts "brew upgrade:"
+puts 'brew upgrade:'
 puts `brew upgrade`
 
-puts "brew cask upgrade"
+puts 'brew cask upgrade'
 
 cask_list = `brew cask list`.split("\n")
 ignore_item = ['']#gpgtools']
@@ -45,13 +45,13 @@ cask_list.each do | item |
       puts "#{item} updated !!!"
   end
 
-  puts " "
+  puts ' '
 end
 
-puts "brew cleanup:"
+puts 'brew cleanup:'
 puts `brew cleanup`
 
-puts "brew cask cleanup:"
+puts 'brew cask cleanup:'
 puts `brew cask cleanup`
 
 puts "\nall of done.\n"
