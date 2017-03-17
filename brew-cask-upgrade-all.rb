@@ -19,7 +19,7 @@ FORCE_UPDATE = ARGV[0] == '-f'
   # get most recently version number
   current = `ls -t /usr/local/Caskroom/#{item}/`.split("\n").first.strip
   # get latest version number
-  latest = `brew cask info #{item} | grep #{item} | grep #{item} | head -n 1`.split(': ')[1].strip
+  latest = `brew cask info #{item} | grep #{item} | head -n 1`.split(': ')[1].strip
 
   # output differences
   puts "#{item}"
