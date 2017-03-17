@@ -1,20 +1,18 @@
 # brew-cask-upgrade-all
 
-# Requirements
+like a brew upgrade for cask
+
+## Installation
+
+```sh
+curl -O https://raw.githubusercontent.com/imasami/brew-cask-upgrade-all/v1.2.3/brew-cask-upgrade-all.rb
+```
+## Requirements
 
 - macOS
 - ruby
 
-
-# What is this doing
-
-1. `brew update`
-1. `brew upgrade`
-1. check latest version of cask items. `uninstall --force` and `install` that have update version.
-1. `brew cleanup`
-1. `brew cask cleanup`
-
-# usage
+## Usage
 
 ```
 $ brew-cask-upgrade-all [-f]
@@ -64,5 +62,19 @@ Nothing to do
 
 all of done.
 ```
+
+## Support
+
+nop, DIY.
+
+## Contributing
+
+Fork the project, create a new branch, make your changes, and open a pull request.
+
+## Development
+
+- framework
+  - nop
+
 
 
