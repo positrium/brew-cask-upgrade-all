@@ -22,7 +22,7 @@ end
 
 module BrewUpdatable
   def message(msg)
-    puts "#{msg}:"
+    puts "#{msg}" unless COUNT_UPDATES
   end
 
   def update
@@ -38,16 +38,16 @@ class BrewUpdate
   include BrewUpdatable
 
   def update
-    message('brew update')
-    puts `brew update`
+    message 'brew update:'
+    message `brew update`
 
-    message('brew upgrade')
-    puts `brew upgrade`
+    message 'brew upgrade:'
+    message `brew upgrade`
   end
 
   def cleanup
-    message('brew cleanup')
-    puts `brew cleanup`
+    message 'brew cleanup:'
+    message `brew cleanup`
   end
 end
 
@@ -63,7 +63,7 @@ class CasksUpdate
   end
 
   def update
-    message('brew cask upgrade')
+    message 'brew cask upgrade'
 
     `brew cask list`.split("\n").each do |item|
       # ignore when specified it
@@ -75,36 +75,40 @@ class CasksUpdate
       latest = `brew cask info #{item} | grep #{item} | head -n 1`.split(': ')[1].strip
 
       # output differences
-      puts "#{item}"
-      puts "latest  : #{latest}"
-      puts "current : #{current}"
+      message "#{item}"
+      message "latest  : #{latest}"
+      message "current : #{current}"
+      message ' '
 
       # verify
       if latest != current
         if FORCE_UPDATE && latest == 'latest'
-          puts "#{item} updating.."
-          puts `brew cask uninstall --force #{item}`
-          puts `brew cask install #{item}`
-          puts "#{item} updated !!!"
+          message "#{item} updating.."
+          message `brew cask uninstall --force #{item}`
+          message `brew cask install #{item}`
+          message "#{item} updated !!!"
+          message ' '
         elsif DRY_RUN
           # do nothing
         elsif COUNT_UPDATES
           @count = @count + 1
           # do nothing
         else
-          puts "#{item} updating.."
-          puts `brew cask uninstall --force #{item}`
-          puts `brew cask install #{item}`
-          puts "#{item} updated !!!"
+          message "#{item} updating.."
+          message `brew cask uninstall --force #{item}`
+          message `brew cask install #{item}`
+          message "#{item} updated !!!"
+          message ' '
         end
       end
-      puts ' '
     end
   end
 
   def cleanup
-    message('brew cask cleanup')
-    puts `brew cask cleanup`
+    message 'brew cask cleanup'
+    message `brew cask cleanup`
+
+    message "\nall of done.\n"
   end
 end
 
@@ -115,8 +119,6 @@ brew.cleanup
 casks = CasksUpdate.new
 casks.update
 casks.cleanup
-
-puts "\nall of done.\n"
 
 if COUNT_UPDATES
   puts casks.update_count
