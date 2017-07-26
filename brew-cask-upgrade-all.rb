@@ -9,12 +9,13 @@ COUNT_UPDATES = ARGV.include?('-c') || ARGV.include?('--count')
 
 if HELP_USAGE
   puts 'usage:'
-  puts '  update brew and brew casks.'
+  puts '  upgrade brew and brew casks.'
   puts ' '
   puts '  -h , --help : this help message.'
   puts '  -f , --force : force upgrade that newest version is "latest".'
-  puts '  -d , --dry-run : experimental , dry run.'
-  puts '  -c , --count : experimental , count updatable casks.'
+  puts '  -d , --dry-run : dry run but execute brew update, brew cleanup.'
+  puts '  -c , --count : count updatable casks.'
+  puts ' '
   exit
 end
 
@@ -63,7 +64,7 @@ class CasksUpdate
   end
 
   def update
-    message 'brew cask upgrade'
+    message 'brew cask upgrade:'
 
     `brew cask list`.split("\n").each do |item|
       # ignore when specified it
@@ -89,9 +90,10 @@ class CasksUpdate
           message "#{item} updated !!!"
           message ' '
         elsif DRY_RUN
-          # do nothing
+          message "#{item} can update !"
+          message ' '
         elsif COUNT_UPDATES
-          @count = @count + 1
+          @update_count = @update_count + 1
           # do nothing
         else
           message "#{item} updating.."
