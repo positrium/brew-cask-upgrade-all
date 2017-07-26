@@ -5,7 +5,7 @@ like a brew upgrade for cask
 ## Installation
 
 ```sh
-curl -O https://raw.githubusercontent.com/imasami/brew-cask-upgrade-all/v1.2.3/brew-cask-upgrade-all.rb
+curl -O https://raw.githubusercontent.com/imasami/brew-cask-upgrade-all/v1.3.0/brew-cask-upgrade-all.rb
 ```
 ## Requirements
 
@@ -15,9 +15,14 @@ curl -O https://raw.githubusercontent.com/imasami/brew-cask-upgrade-all/v1.2.3/b
 ## Usage
 
 ```
-$ brew-cask-upgrade-all [-f]
+$ ./brew-cask-upgrade-all.rb -h
+usage:
+  update brew and brew casks.
 
--f : force upgrade that newest version is 'latest'
+  -h , --help : this help message.
+  -f , --force : force upgrade that newest version is "latest".
+  -d , --dry-run : dry run but execute brew update, brew cleanup.
+  -c , --count : count updatable casks.
 ```
 
 ```
@@ -25,8 +30,9 @@ $ brew-cask-upgrade-all [-f]
 
 brew update:
 Already up-to-date.
-brew upgrade:
+brew cleanup:
 
+brew cask upgrade:
 hosts
 latest  : 1.3
 current : 1.3
@@ -76,5 +82,7 @@ Fork the project, create a new branch, make your changes, and open a pull reques
 - framework
   - nop
 
+## see also
 
+- [bitbar plugin](https://github.com/imasami/bitbar-brew-cask-upgrade-all)
 
