@@ -5,7 +5,7 @@ like a brew upgrade for cask
 ## Installation
 
 ```sh
-curl -O https://raw.githubusercontent.com/imasami/brew-cask-upgrade-all/v1.3.0/brew-cask-upgrade-all.rb
+curl -O https://raw.githubusercontent.com/positrium/brew-cask-upgrade-all/v1.3.0/brew-cask-upgrade-all.rb
 ```
 ## Requirements
 
