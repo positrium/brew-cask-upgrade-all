@@ -84,5 +84,5 @@ Fork the project, create a new branch, make your changes, and open a pull reques
 
 ## see also
 
-- [bitbar plugin](https://github.com/imasami/bitbar-brew-cask-upgrade-all)
+- [bitbar plugin](https://github.com/positrium/bitbar-brew-cask-upgrade-all)
 
