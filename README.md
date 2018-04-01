@@ -1,6 +1,6 @@
 # brew-cask-upgrade-all
 
-like a brew upgrade for cask
+like a brew upgrade for cask. [see also](https://qiita.com/positrium/items/3ac014f175955941ccb3).
 
 ## Installation
 
