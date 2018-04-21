@@ -21,22 +21,7 @@ end
 
 # update brew
 
-module Updatable
-  def update
-    raise NotImplementedError
-  end
-end
-
-module Cleanable
-  def cleanup
-    raise NotImplementedError
-  end
-end
-
 class BrewUpdate
-  include Updatable
-  include Cleanable
-
   def update
     puts 'brew update:'
     puts `brew update`
@@ -52,8 +37,6 @@ class BrewUpdate
 end
 
 class CasksUpdate
-  include Updatable
-  include Cleanable
 
   @ignore_items
   @items
@@ -63,15 +46,12 @@ class CasksUpdate
     @ignore_items = [''] #gpgtools']
     @update_count = 0
     @items = `brew cask list`.split("\n")
+    @items - @items - @ignore_items
   end
 
   def update
     puts 'brew cask upgrade:'
-
     @items.each do |item|
-      # ignore when specified it
-      next if @ignore_items.include?(item)
-
       if updatable(item)
         # output differences
         differently_info(item)
@@ -82,7 +62,6 @@ class CasksUpdate
   end
 
   def count_up_update_items()
-    # silent, no messages.
     @items.each do |item|
       @update_count = @update_count + 1 if updatable(item)
     end
@@ -93,9 +72,6 @@ class CasksUpdate
     puts 'brew cask force upgrade:'
 
     @items.each do |item|
-      # ignore when specified it
-      next if @ignore_items.include?(item)
-
       if updatable(item)
         # output differences
         differently_info(item)
@@ -112,9 +88,6 @@ class CasksUpdate
     puts 'brew cask upgrade dry-run:'
 
     @items.each do |item|
-      # ignore when specified it
-      next if @ignore_items.include?(item)
-
       if updatable(item)
         # output differences
         differently_info(item)
