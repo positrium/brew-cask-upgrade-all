@@ -68,6 +68,7 @@ class CasksUpdate
   def update
     puts 'brew cask upgrade:'
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     @items.each do |item|
       # ignore when specified it
@@ -76,6 +77,66 @@ class CasksUpdate
       if updatable(item)
         # output differences
         differently_info(item)
+        update_item(item)
+      end
+    end
+
+  end
+
+  def count_up_update_items()
+    # silent, no messages.
+    @items.each do |item|
+      # ignore when specified it
+      next if @ignore_items.include?(item)
+
+      @update_count = @update_count + 1 if updatable(item)
+    end
+
+  end
+
+  def force_update()
+    puts 'brew cask force upgrade:'
+=======
+>>>>>>> c5a80bf... refactored
+
+    @items.each do |item|
+      # ignore when specified it
+      next if @ignore_items.include?(item)
+
+      if updatable(item)
+        # output differences
+        differently_info(item)
+<<<<<<< HEAD
+=======
+        update_item(item)
+      end
+    end
+
+  end
+
+  def count_up_update_items()
+    # silent, no messages.
+    @items.each do |item|
+      @update_count = @update_count + 1 if updatable(item)
+    end
+
+  end
+
+  def force_update()
+    puts 'brew cask force upgrade:'
+=======
+>>>>>>> 7c63c1b9448c3f1f24d939f851f64d4b062a23a8
+
+    @items.each do |item|
+      # ignore when specified it
+      next if @ignore_items.include?(item)
+
+      if updatable(item)
+        # output differences
+        differently_info(item)
+<<<<<<< HEAD
+>>>>>>> c5a80bf... refactored
+=======
         update_item(item)
       end
     end
@@ -100,6 +161,7 @@ class CasksUpdate
       if updatable(item)
         # output differences
         differently_info(item)
+>>>>>>> 7c63c1b9448c3f1f24d939f851f64d4b062a23a8
 
         if latest(item) == 'latest'
           force_update_item(item)
