@@ -46,7 +46,7 @@ class CasksUpdate
     @ignore_items = [''] #gpgtools']
     @update_count = 0
     @items = `brew cask list`.split("\n")
-    @items - @items - @ignore_items
+    @items = @items - @ignore_items
   end
 
   def update
