@@ -43,7 +43,7 @@ class CasksUpdate
   attr_reader :update_count
 
   def initialize
-    @ignore_items = [''] #gpgtools']
+    @ignore_items = ['karabiner-elements', 'gpgtools']
     @update_count = 0
     @items = `brew cask list`.split("\n")
     @items - @items - @ignore_items
