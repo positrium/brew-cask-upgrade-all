@@ -5,7 +5,7 @@ like a brew upgrade for cask. [see also](https://qiita.com/positrium/items/3ac01
 ## Installation
 
 ```sh
-curl -O https://raw.githubusercontent.com/positrium/brew-cask-upgrade-all/v1.3.0/brew-cask-upgrade-all.rb
+curl -O https://raw.githubusercontent.com/positrium/brew-cask-upgrade-all/v1.3.4/brew-cask-upgrade-all.rb
 ```
 ## Requirements
 
@@ -17,12 +17,13 @@ curl -O https://raw.githubusercontent.com/positrium/brew-cask-upgrade-all/v1.3.0
 ```
 $ ./brew-cask-upgrade-all.rb -h
 usage:
-  update brew and brew casks.
+  upgrade brew and brew casks.
 
-  -h , --help : this help message.
-  -f , --force : force upgrade that newest version is "latest".
-  -d , --dry-run : dry run but execute brew update, brew cleanup.
-  -c , --count : count updatable casks.
+  -h , --help     : this help message.
+  --force         : force upgrade that newest version is "latest" or "auto_updates".
+  -d , --dry-run  : dry run ( not includes "latest" and "auto_updates" ) but execute brew update, brew cleanup.
+  --force-dry-run : dry run ( includes "latest" and "auto_updates" ) but execute brew update, brew cleanup.
+  -c , --count    : count updatable casks. for bitbar plugin: https://github.com/positrium/bitbar-brew-cask-upgrade-all
 ```
 
 ```
