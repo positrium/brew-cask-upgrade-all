@@ -2,19 +2,21 @@
 
 # check arguments
 
-FORCE_UPDATE = ARGV.include?('-f') || ARGV.include?('--force')
+FORCE_UPDATE = ARGV.include?('--force')
 HELP_USAGE = ARGV.include?('-h') || ARGV.include?('--help')
 DRY_RUN = ARGV.include?('-d') || ARGV.include?('--dry-run')
+FORCE_DRY_RUN = ARGV.include?('--force-dry-run')
 UPDATE_COUNT_ONLY = ARGV.include?('-c') || ARGV.include?('--count')
 
 if HELP_USAGE
   puts 'usage:'
   puts '  upgrade brew and brew casks.'
   puts ' '
-  puts '  -h , --help : this help message.'
-  puts '  -f , --force : force upgrade that newest version is "latest".'
-  puts '  -d , --dry-run : dry run but execute brew update, brew cleanup.'
-  puts '  -c , --count : count updatable casks. for bitbar plugin: https://github.com/positrium/bitbar-brew-cask-upgrade-all'
+  puts '  -h , --help     : this help message.'
+  puts '  --force         : force upgrade that newest version is "latest" or "auto_updates".'
+  puts '  -d , --dry-run  : dry run ( not includes "latest" and "auto_updates" ) but execute brew update, brew cleanup.'
+  puts '  --force-dry-run : dry run ( includes "latest" and "auto_updates" ) but execute brew update, brew cleanup.'
+  puts '  -c , --count    : count updatable casks. for bitbar plugin: https://github.com/positrium/bitbar-brew-cask-upgrade-all'
   puts ' '
   exit
 end
@@ -43,7 +45,7 @@ class CasksUpdate
   attr_reader :update_count
 
   def initialize
-    @ignore_items = ['karabiner-elements', 'gpgtools']
+    @ignore_items = []
     @update_count = 0
     @items = `brew cask list`.split("\n")
     @items = @items - @ignore_items
@@ -53,49 +55,67 @@ class CasksUpdate
     puts 'brew cask upgrade:'
     @items.each do |item|
       if updatable(item)
-        # output differences
-        differently_info(item)
-        update_item(item)
+        unless self_updatable(item)
+          # output differences
+          differently_info(item)
+
+          update_item(item)
+        end
       end
     end
-
   end
 
-  def count_up_update_items()
+  def count_up_update_items
     @items.each do |item|
       @update_count = @update_count + 1 if updatable(item)
     end
-
   end
 
-  def force_update()
+  def force_update
     puts 'brew cask force upgrade:'
 
     @items.each do |item|
       if updatable(item)
-        # output differences
-        differently_info(item)
+        if self_updatable(item)
+          # output differences
+          differently_info(item)
 
-        if latest(item) == 'latest'
           force_update_item(item)
         end
       end
     end
-
   end
 
-  def dry_run()
+  def dry_run
     puts 'brew cask upgrade dry-run:'
 
     @items.each do |item|
       if updatable(item)
-        # output differences
-        differently_info(item)
+        unless self_updatable(item)
 
-        dry_run_item(item)
+          # output differences
+          differently_info(item)
+
+          dry_run_item(item)
+        end
       end
     end
+  end
 
+  def force_dry_run
+    puts 'brew cask upgrade force-dry-run:'
+
+    @items.each do |item|
+      if updatable(item)
+        if self_updatable(item)
+
+          # output differences
+          differently_info(item)
+
+          dry_run_item(item)
+        end
+      end
+    end
   end
 
   def cleanup
@@ -106,6 +126,12 @@ class CasksUpdate
   end
 
   private
+
+  # judge self-updatable item
+  def self_updatable(item)
+    true if latest(item) == 'latest'
+    true if latest(item).include?('auto_updates')
+  end
 
   # output differences
   def differently_info(item)
@@ -160,6 +186,8 @@ casks = CasksUpdate.new
 if FORCE_UPDATE
   casks.force_update
   casks.cleanup
+elsif FORCE_DRY_RUN
+  casks.force_dry_run
 elsif DRY_RUN
   casks.dry_run
 elsif UPDATE_COUNT_ONLY
